@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b5e8a">
+<title>Sathi – Senior Companion</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <div class="greet" id="greet"></div>
+    <div class="clock" id="clock"></div>
+  </div>
+  <button class="icon-btn" id="speakBtn" aria-label="Read aloud">🔊</button>
+</header>
+
+<main id="main">
+
+  <!-- HOME -->
+  <section class="screen active" id="s-home">
+    <button class="sos" id="sosBtn" aria-label="SOS">
+      <span class="sos-big">SOS</span>
+      <span class="sos-small" data-t="sosHint"></span>
+    </button>
+    <div id="sosStatus" class="status" role="status"></div>
+
+    <div class="grid">
+      <button class="tile green" id="okBtn"><span>✅</span><b data-t="imOk"></b><small id="okSub"></small></button>
+      <button class="tile blue" data-go="meds"><span>💊</span><b data-t="meds"></b><small id="medSub"></small></button>
+      <button class="tile orange" data-go="call"><span>📞</span><b data-t="callFamily"></b></button>
+      <button class="tile red" data-go="emerg"><span>🚑</span><b data-t="emergency"></b></button>
+      <button class="tile purple" data-go="health"><span>❤️</span><b data-t="health"></b></button>
+      <button class="tile teal" data-go="more"><span>⋯</span><b data-t="more"></b></button>
+    </div>
+  </section>
+
+  <!-- MEDICINES -->
+  <section class="screen" id="s-meds">
+    <h2 data-t="meds"></h2>
+    <div id="medList"></div>
+    <div class="card">
+      <h3 data-t="addMed"></h3>
+      <label data-t="medName"></label><input id="medName" type="text">
+      <label data-t="medDose"></label><input id="medDose" type="text" placeholder="1 tablet">
+      <label data-t="medTime"></label><input id="medTime" type="time" value="08:00">
+      <label data-t="medNote"></label>
+      <select id="medNote">
+        <option value="" data-t="anytime"></option>
+        <option value="before" data-t="beforeFood"></option>
+        <option value="after" data-t="afterFood"></option>
+      </select>
+      <button class="btn" id="addMed" data-t="add"></button>
+    </div>
+  </section>
+
+  <!-- CALL FAMILY -->
+  <section class="screen" id="s-call">
+    <h2 data-t="callFamily"></h2>
+    <div id="contactList"></div>
+    <div class="card">
+      <h3 data-t="addContact"></h3>
+      <label data-t="name"></label><input id="cName" type="text">
+      <label data-t="phone"></label><input id="cPhone" type="tel" inputmode="tel">
+      <label data-t="relation"></label><input id="cRel" type="text" placeholder="Son / Daughter / Doctor">
+      <button class="btn" id="addContact" data-t="add"></button>
+    </div>
+  </section>
+
+  <!-- EMERGENCY NUMBERS -->
+  <section class="screen" id="s-emerg">
+    <h2 data-t="emergency"></h2>
+    <a class="call-row red" href="tel:112"><b>112</b><span data-t="n112"></span></a>
+    <a class="call-row red" href="tel:108"><b>108</b><span data-t="n108"></span></a>
+    <a class="call-row orange" href="tel:14567"><b>14567</b><span data-t="n14567"></span></a>
+    <a class="call-row orange" href="tel:100"><b>100</b><span data-t="n100"></span></a>
+    <a class="call-row orange" href="tel:101"><b>101</b><span data-t="n101"></span></a>
+    <a class="call-row blue" href="tel:181"><b>181</b><span data-t="n181"></span></a>
+    <a class="call-row blue" href="tel:1930"><b>1930</b><span data-t="n1930"></span></a>
+  </section>
+
+  <!-- HEALTH -->
+  <section class="screen" id="s-health">
+    <h2 data-t="health"></h2>
+    <div class="card">
+      <h3 data-t="medCard"></h3>
+      <label data-t="fullName"></label><input id="pName" type="text">
+      <label data-t="age"></label><input id="pAge" type="number" inputmode="numeric">
+      <label data-t="blood"></label>
+      <select id="pBlood"><option></option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select>
+      <label data-t="conditions"></label><input id="pCond" type="text" placeholder="Diabetes, BP, Heart">
+      <label data-t="allergies"></label><input id="pAllergy" type="text">
+      <label data-t="doctor"></label><input id="pDoctor" type="text">
+      <label data-t="address"></label><input id="pAddr" type="text">
+      <button class="btn" id="saveProfile" data-t="save"></button>
+    </div>
+    <div class="card">
+      <h3 data-t="logReading"></h3>
+      <div class="row2">
+        <div><label data-t="bpTop"></label><input id="bpS" type="number" inputmode="numeric"></div>
+        <div><label data-t="bpLow"></label><input id="bpD" type="number" inputmode="numeric"></div>
+      </div>
+      <div class="row2">
+        <div><label data-t="sugar"></label><input id="sugar" type="number" inputmode="numeric"></div>
+        <div><label data-t="weight"></label><input id="weight" type="number" inputmode="decimal"></div>
+      </div>
+      <button class="btn" id="addReading" data-t="save"></button>
+      <div id="readingMsg" class="status"></div>
+    </div>
+    <div class="card"><h3 data-t="history"></h3><div id="readingList"></div></div>
+  </section>
+
+  <!-- MORE -->
+  <section class="screen" id="s-more">
+    <h2 data-t="more"></h2>
+    <button class="tile wide blue" data-go="appt"><span>📅</span><b data-t="appts"></b></button>
+    <button class="tile wide teal" id="waterBtn"><span>💧</span><b data-t="water"></b><small id="waterSub"></small></button>
+    <button class="tile wide purple" id="whereBtn"><span>📍</span><b data-t="whereAmI"></b></button>
+    <button class="tile wide orange" id="fakeBtn"><span>📱</span><b data-t="fakeCall"></b></button>
+    <button class="tile wide green" data-go="game"><span>🧠</span><b data-t="brain"></b></button>
+    <button class="tile wide gray" data-go="settings"><span>⚙️</span><b data-t="settings"></b></button>
+    <div id="whereMsg" class="status"></div>
+  </section>
+
+  <!-- APPOINTMENTS -->
+  <section class="screen" id="s-appt">
+    <h2 data-t="appts"></h2>
+    <div id="apptList"></div>
+    <div class="card">
+      <label data-t="apptWhat"></label><input id="apptWhat" type="text" placeholder="Dr. Sharma – Eye check">
+      <label data-t="date"></label><input id="apptDate" type="date">
+      <label data-t="medTime"></label><input id="apptTime" type="time" value="10:00">
+      <button class="btn" id="addAppt" data-t="add"></button>
+    </div>
+  </section>
+
+  <!-- BRAIN GAME -->
+  <section class="screen" id="s-game">
+    <h2 data-t="brain"></h2>
+    <div class="card center">
+      <p data-t="gameHelp"></p>
+      <div id="gameGrid" class="game-grid"></div>
+      <div id="gameMsg" class="status"></div>
+      <button class="btn" id="gameNew" data-t="newGame"></button>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="screen" id="s-settings">
+    <h2 data-t="settings"></h2>
+    <div class="card">
+      <label data-t="language"></label>
+      <select id="lang">
+        <option value="en">English</option><option value="hi">हिन्दी</option><option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="bn">বাংলা</option><option value="ta">தமிழ்</option><option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option><option value="gu">ગુજરાતી</option>
+      </select>
+      <label data-t="textSize"></label>
+      <input id="fontSize" type="range" min="100" max="170" step="10">
+      <label data-t="theme"></label>
+      <select id="theme">
+        <option value="light" data-t="light"></option>
+        <option value="dark" data-t="dark"></option>
+        <option value="contrast" data-t="contrast"></option>
+      </select>
+      <label class="check"><input type="checkbox" id="speakOn"> <span data-t="speakOn"></span></label>
+      <label class="check"><input type="checkbox" id="fallOn"> <span data-t="fallOn"></span></label>
+      <label class="check"><input type="checkbox" id="holdSos"> <span data-t="holdSos"></span></label>
+      <label data-t="checkinBy"></label><input id="checkinTime" type="time" value="10:00">
+      <label data-t="waterEvery"></label>
+      <select id="waterGap"><option value="0" data-t="off"></option><option value="60">1 h</option><option value="120">2 h</option><option value="180">3 h</option></select>
+      <button class="btn" id="notifBtn" data-t="allowNotif"></button>
+    </div>
+    <div class="card">
+      <button class="btn alt" id="exportBtn" data-t="backup"></button>
+      <button class="btn alt" id="importBtn" data-t="restore"></button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+      <button class="btn danger" id="wipeBtn" data-t="wipe"></button>
+    </div>
+  </section>
+
+</main>
+
+<nav class="nav">
+  <button data-go="home" class="on"><span>🏠</span><small data-t="home"></small></button>
+  <button data-go="meds"><span>💊</span><small data-t="meds"></small></button>
+  <button data-go="call"><span>📞</span><small data-t="call"></small></button>
+  <button data-go="health"><span>❤️</span><small data-t="health"></small></button>
+  <button data-go="more"><span>⋯</span><small data-t="more"></small></button>
+</nav>
+
+<!-- Overlays -->
+<div class="overlay" id="alarm">
+  <div class="box">
+    <div class="big-ico">💊</div>
+    <h2 id="alarmTitle"></h2>
+    <p id="alarmText"></p>
+    <button class="btn" id="alarmTaken" data-t="taken"></button>
+    <button class="btn alt" id="alarmSnooze" data-t="snooze"></button>
+  </div>
+</div>
+
+<div class="overlay" id="fall">
+  <div class="box">
+    <div class="big-ico">⚠️</div>
+    <h2 data-t="fallTitle"></h2>
+    <p><span id="fallCount">30</span> <span data-t="fallSecs"></span></p>
+    <button class="btn" id="fallOk" data-t="fallOk"></button>
+    <button class="btn danger" id="fallHelp" data-t="fallHelp"></button>
+  </div>
+</div>
+
+<div class="overlay" id="confirm">
+  <div class="box">
+    <div class="big-ico">🆘</div>
+    <h2 data-t="sosConfirm"></h2>
+    <button class="btn danger" id="confirmYes" data-t="yesHelp"></button>
+    <button class="btn alt" id="confirmNo" data-t="cancel"></button>
+  </div>
+</div>
+
+<div class="overlay" id="fake">
+  <div class="box call-screen">
+    <div class="big-ico">👤</div>
+    <h2 id="fakeName"></h2>
+    <p data-t="incoming"></p>
+    <button class="btn" id="fakeAnswer" data-t="answer"></button>
+    <button class="btn danger" id="fakeEnd" data-t="decline"></button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>

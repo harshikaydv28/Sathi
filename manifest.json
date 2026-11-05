@@ -1,0 +1,13 @@
+{
+  "name": "Sathi – Senior Companion",
+  "short_name": "Sathi",
+  "description": "Medicine reminders, SOS, daily check-in and health log for senior citizens",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f3ec",
+  "theme_color": "#1b5e8a",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
